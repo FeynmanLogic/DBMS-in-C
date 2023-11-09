@@ -5,14 +5,12 @@ void Showall(FILE *fileptr)
     char tempbuffer[100];
     while (fgets(tempbuffer, sizeof(tempbuffer), fileptr))
     {
-        /* note that fgets don't strip the terminating \n, checking its
-           presence would allow to handle lines longer that sizeof(line) */
+       //this fgets has nice functionality, we use
+       //it to have values get into buffer
         printf("%s", tempbuffer);
     }
-    /* may check feof here to make a difference between eof and io failure -- network
-       timeout for instance */
 
-    fclose(tempbuffer);
+    fclose(fileptr);
 }
 int main()
 {
