@@ -1,4 +1,7 @@
-ID, NAME, COLLEGE
-P1, Hitesh, IITD
-P2, Ramesh, IITB
-P3, suresh, IITK
+1,Hitesh,IITD
+2,Ramesh,IITB
+3,suresh,IITK
+23,Namit,MIT
+34,Naman,NYU
+14,Mahesh,SVNIT
+13,Naman,BU
