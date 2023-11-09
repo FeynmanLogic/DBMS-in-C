@@ -1,24 +1,27 @@
 #include <stdio.h>
 #include <string.h>
-void Showall(FILE* fileptr)
+void Showall(FILE *fileptr)
 {
     char tempbuffer[100];
-    while (fgets(tempbuffer, sizeof(tempbuffer), fileptr)) {
+    while (fgets(tempbuffer, sizeof(tempbuffer), fileptr))
+    {
         /* note that fgets don't strip the terminating \n, checking its
            presence would allow to handle lines longer that sizeof(line) */
-        printf("%s", tempbuffer); 
+        printf("%s", tempbuffer);
     }
     /* may check feof here to make a difference between eof and io failure -- network
        timeout for instance */
 
     fclose(tempbuffer);
 }
-int main() {
-   
+int main()
+{
+
     FILE *fileptr = NULL;
     fileptr = fopen("1.txt", "r");
 
-    if (fileptr == NULL) {
+    if (fileptr == NULL)
+    {
         perror("Error opening file");
         return 1;
     }
@@ -26,10 +29,10 @@ int main() {
     char buffer[100];
     printf("Let's implement a basic DBMS application in C\n which has CRUD Functionality\n");
     printf("Enter 1 for Creating entry\n2 for Reading entry\n3 for Updating\n4 for Delete and \n5 for show database:\t");
-    scanf("%d",&operation);
-    switch(operation)
+    scanf("%d", &operation);
+    switch (operation)
     {
-        case 5:
+    case 5:
         Showall(fileptr);
         break;
     }
