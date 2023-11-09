@@ -11,13 +11,12 @@ void Showall(FILE *fileptr) {
     fclose(fileptr);
 }
 
-void AddEntry(FILE *fileptr) {
+void CreateEntry(FILE *fileptr) {
     char name[10], college[10];
     int id;
     int id_flag;
     // this is to check whether id is new or not
-
-    // Rewind the file to the beginning
+    // Rewind the file to the beginning after traversal
     rewind(fileptr);
 
     printf("Enter ID: ");
@@ -44,7 +43,25 @@ void AddEntry(FILE *fileptr) {
     
     fprintf(fileptr, "%d,%s,%s\n", id, name, college);
 }
+void ReadEntry(FILE* fileptr)
+{
+    int id,id_flag;
+    char name[10], college[10];
+    rewind(fileptr);
+    printf("enter the id whose details you want\t");
+    scanf("%d",&id);
+   while (fscanf(fileptr, "%d,%9[^,],%9[^\n]\n", &id_flag, name, college) == 3) {
+      
+        if(id==id_flag)
+        {
+            printf("Name:%s\n",name);
+            printf("College: %s",college);
+            return;
+        }
+    
+    }
 
+}
 void UpdateEntry(FILE* fileptr) {
     // some code
 }
@@ -59,7 +76,7 @@ int main() {
     }
 
     int operation;
-    printf("Let's implement a basic DBMS application in C\n which has CRUD Functionality\n");
+    printf("Let's implement a basic DBMS application in C\nwhich has CRUD Functionality\n");
     printf("Enter 1 for Creating entry\n2 for Reading entry\n3 for Updating\n4 for Delete and \n5 for show database:\t");
     scanf("%d", &operation);
 
@@ -68,7 +85,10 @@ int main() {
             Showall(fileptr);
             break;
         case 1:
-            AddEntry(fileptr);
+            CreateEntry(fileptr);
+            break;
+        case 2:
+            ReadEntry(fileptr);
             break;
         // Add other cases for different operations
 
