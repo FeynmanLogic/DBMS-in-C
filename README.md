@@ -1,4 +1,4 @@
-#C DBMS Application
+# C DBMS Application
 
 This Database Management System (DBMS) application in C provides basic CRUD (Create, Read, Update, Delete) functionality. The program operates on a text file ("1.txt") to store and manage entries, each consisting of an ID, name, and college. The user is presented with a menu to choose operations such as creating a new entry, reading the entire database, updating an entry, and deleting an entry. The application ensures the integrity of the database by checking for duplicate IDs before adding new entries.
 
