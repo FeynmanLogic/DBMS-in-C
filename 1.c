@@ -23,7 +23,7 @@ void CreateEntry(FILE *fileptr) {
     scanf("%d", &id);
 
     // Check if id is already existing or not
-    while (fscanf(fileptr, "%d, ", &id_flag) == 1) {
+    while (fscanf(fileptr, "%d,", &id_flag) == 1) {
         // Process the integer, string1, and string2 as needed
         if(id==id_flag)
         {
@@ -150,18 +150,23 @@ while(1){
     switch (operation) {
         case 5:
             Showall(fileptr);
+            
             break;
         case 1:
             CreateEntry(fileptr);
+            
             break;
         case 2:
             ReadEntry(fileptr);
+            
             break;
         case 3:
             UpdateEntry(fileptr);
+            
             break;
         case 4:
             DeleteEntry(fileptr);
+            
             break;
         // Add other cases for different operations
         
