@@ -65,24 +65,66 @@ void ReadEntry(FILE* fileptr)
 
 }
 void UpdateEntry(FILE* fileptr) {
-    int id,id_flag;
-    char name[10], college[10],newname[10],newclg[10];
-    rewind(fileptr);
-    printf("enter the id whose details you want to update\t");
-    scanf("%d",&id);
-   while (fscanf(fileptr, "%d,%9[^,],%9[^\n]\n", &id_flag, name, college) == 3) {
-      
-        if(id==id_flag)
-        {
-            printf("Enter New name:%s\n",&newname);
-            printf("Enter new College: %s",&newclg);
-            fprintf(fileptr,"%d,%s,%s",id,newname,newclg);
+    int id, id_flag;
+    char name[10], college[10], newname[10], newclg[10];
+    FILE* tempFile = fopen("temp.txt", "w"); // Temporary file
 
-            return;
-        }
-    
+    if (tempFile == NULL) {
+        printf("Error creating temporary file.\n");
+        return;
     }
 
+    rewind(fileptr);
+    printf("Enter the ID whose details you want to update: ");
+    scanf("%d", &id);
+
+    while (fscanf(fileptr, "%d,%9[^,],%9[^\n]\n", &id_flag, name, college) == 3) {
+        if (id == id_flag) {
+            printf("Enter new name: ");
+            scanf("%s", newname);
+            printf("Enter new college: ");
+            scanf("%s", newclg);
+            fprintf(tempFile, "%d,%s,%s\n", id, newname, newclg);
+        } else {
+            fprintf(tempFile, "%d,%s,%s\n", id_flag, name, college);
+        }
+    }
+
+    fclose(fileptr);
+    fclose(tempFile);
+
+    remove("1.txt"); // Remove the original file
+    rename("temp.txt", "1.txt"); // Rename the temporary file to the original file
+}
+void DeleteEntry(FILE* fileptr) {
+    int id, id_flag;
+    char name[10], college[10], newname[10], newclg[10];
+    FILE* tempFile = fopen("temp.txt", "w"); // Temporary file
+
+    if (tempFile == NULL) {
+        printf("Error creating temporary file.\n");
+        return;
+    }
+
+    rewind(fileptr);
+    printf("Enter the ID whose entry you want to delete: ");
+    scanf("%d", &id);
+
+    while (fscanf(fileptr, "%d,%9[^,],%9[^\n]\n", &id_flag, name, college) == 3) {
+        if (id == id_flag) {
+           continue;
+        }  
+            fprintf(tempFile, "%d,%s,%s\n", id_flag, name, college);
+        
+    }
+
+    fclose(fileptr);
+    fclose(tempFile);
+
+
+    rename("temp.txt", "1u.txt"); 
+    remove("1.txt");
+    rename("1u.txt","1.txt");
 }
 
 
@@ -114,6 +156,12 @@ while(1){
             break;
         case 2:
             ReadEntry(fileptr);
+            break;
+        case 3:
+            UpdateEntry(fileptr);
+            break;
+        case 4:
+            DeleteEntry(fileptr);
             break;
         // Add other cases for different operations
         
