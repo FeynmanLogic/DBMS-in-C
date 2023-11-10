@@ -56,15 +56,35 @@ void ReadEntry(FILE* fileptr)
         {
             printf("Name:%s\n",name);
             printf("College: %s",college);
+             rewind(fileptr);
+            return;
+        }
+    
+    }
+   
+
+}
+void UpdateEntry(FILE* fileptr) {
+    int id,id_flag;
+    char name[10], college[10],newname[10],newclg[10];
+    rewind(fileptr);
+    printf("enter the id whose details you want to update\t");
+    scanf("%d",&id);
+   while (fscanf(fileptr, "%d,%9[^,],%9[^\n]\n", &id_flag, name, college) == 3) {
+      
+        if(id==id_flag)
+        {
+            printf("Enter New name:%s\n",&newname);
+            printf("Enter new College: %s",&newclg);
+            fprintf(fileptr,"%d,%s,%s",id,newname,newclg);
+
             return;
         }
     
     }
 
 }
-void UpdateEntry(FILE* fileptr) {
-    // some code
-}
+
 
 int main() {
     FILE *fileptr = NULL;
@@ -76,10 +96,15 @@ int main() {
     }
 
     int operation;
+    
+while(1){
     printf("Let's implement a basic DBMS application in C\nwhich has CRUD Functionality\n");
-    printf("Enter 1 for Creating entry\n2 for Reading entry\n3 for Updating\n4 for Delete and \n5 for show database:\t");
+    printf("Enter 15 for stopping\nEnter 1 for Creating entry\n2 for Reading entry\n3 for Updating\n4 for Delete and \n5 for show database:\t");
     scanf("%d", &operation);
-
+    if(operation==15)
+    {
+        break;
+    }
     switch (operation) {
         case 5:
             Showall(fileptr);
@@ -91,10 +116,13 @@ int main() {
             ReadEntry(fileptr);
             break;
         // Add other cases for different operations
-
+        
     }
 
-    fclose(fileptr);
+    
 
-    return 0;
+    
+}
+fclose(fileptr);
+return 0;
 }
